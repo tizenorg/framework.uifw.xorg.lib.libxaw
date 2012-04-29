@@ -1,13 +1,13 @@
 
-Name:       libXaw
+Name:       libxaw
 Summary:    X.Org X11 libXaw runtime library
 Version:    1.0.8
-Release:    1
+Release:    2.7
 Group:      System/Libraries
 License:    MIT
 URL:        http://www.x.org/
 Source0:    http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.gz
-Source101:  libXaw-rpmlintrc
+Source101:  libxaw-rpmlintrc
 Patch1:     01_Xaw_StripChart_fix.diff
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -40,11 +40,8 @@ Description: %{summary}
 
 
 %build
-
-%reconfigure \
-	--disable-xaw6 \
-	--disable-xaw8 \
-	LDFALGS="-Wl,--hash-style=both -Wl,--as-needed"
+export LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
+%reconfigure --disable-xaw6 --disable-xaw8
 
 make %{?jobs:-j%jobs}
 
