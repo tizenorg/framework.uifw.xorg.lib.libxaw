@@ -8,6 +8,7 @@ License:    MIT
 URL:        http://www.x.org/
 Source0:    http://xorg.freedesktop.org/releases/individual/lib/%{name}-%{version}.tar.gz
 Source101:  libxaw-rpmlintrc
+Source1001: packaging/libxaw.manifest 
 Patch1:     01_Xaw_StripChart_fix.diff
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -40,6 +41,7 @@ Description: %{summary}
 
 
 %build
+cp %{SOURCE1001} .
 export LDFLAGS+=" -Wl,--hash-style=both -Wl,--as-needed"
 %reconfigure --disable-xaw6 --disable-xaw8
 
@@ -63,6 +65,7 @@ rm -rf %{buildroot}/%{_datadir}/doc/libXaw
 
 
 %files
+%manifest libxaw.manifest
 %defattr(-,root,root,-)
 %doc COPYING README ChangeLog
 %{_libdir}/libXaw.so.7
@@ -71,6 +74,7 @@ rm -rf %{buildroot}/%{_datadir}/doc/libXaw
 
 
 %files devel
+%manifest libxaw.manifest
 %defattr(-,root,root,-)
 %dir %{_includedir}/X11
 %dir %{_includedir}/X11/Xaw
