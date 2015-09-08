@@ -21,7 +21,7 @@ Xaw is a widget set based on the X Toolkit Intrinsics (Xt) Library.
 %package devel
 Summary: Development files for %{name}
 Group: Development/Libraries
-Provides: libxaw-devel 
+Provides: libxaw-devel
 Requires: %{name} = %{version}-%{release}
 Requires: pkgconfig
 Requires: pkgconfig(xproto) pkgconfig(xmu) pkgconfig(xt) pkgconfig(xpm)
@@ -42,7 +42,8 @@ make %{?jobs:-j%jobs}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
+mkdir -p %{buildroot}/usr/share/license
+cp -af COPYING %{buildroot}/usr/share/license/%{name}
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 rm -f $RPM_BUILD_ROOT%{_libdir}/*.la
 
@@ -56,7 +57,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README ChangeLog
+/usr/share/license/%{name}
+#%doc COPYING README ChangeLog
 %{_libdir}/libXaw.so.7
 %{_libdir}/libXaw7.so.7
 %{_libdir}/libXaw7.so.7.0.0
